@@ -1,2 +1,0 @@
-# VAESNI
-Sohbet Muhabbet
