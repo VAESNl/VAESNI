@@ -1,366 +1,322 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vaesni</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+  <title>Vaesni - Kayıt Ol</title>
 
-body {
-    background: #0b0d12;
-    color: white;
-    height: 100vh;
-    overflow: hidden;
-}
-
-/* ÜST BAR */
-.topbar {
-    height: 60px;
-    background: #11141c;
-    display: flex;
-    align-items: center;
-    padding: 0 18px;
-    border-bottom: 1px solid #222632;
-}
-
-.logo {
-    font-size: 23px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.logo span {
-    color: #7c5cff;
-}
-
-/* ANA ALAN */
-.app {
-    display: flex;
-    height: calc(100vh - 60px);
-}
-
-/* SUNUCULAR */
-.servers {
-    width: 75px;
-    background: #0e1016;
-    border-right: 1px solid #20232d;
-    padding-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-}
-
-.server {
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    background: #191d27;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.server:hover {
-    background: #7c5cff;
-    border-radius: 12px;
-}
-
-.server.add {
-    color: #7c5cff;
-    font-size: 25px;
-}
-
-/* KANALLAR */
-.channels {
-    width: 230px;
-    background: #12151d;
-    padding: 20px 15px;
-    border-right: 1px solid #20232d;
-}
-
-.channels h3 {
-    font-size: 14px;
-    color: #888f9f;
-    margin-bottom: 15px;
-}
-
-.channel {
-    padding: 12px;
-    border-radius: 8px;
-    color: #aeb4c2;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-
-.channel:hover,
-.channel.active {
-    background: #202431;
-    color: white;
-}
-
-/* SOHBET */
-.chat {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.chat-header {
-    height: 60px;
-    border-bottom: 1px solid #20232d;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    font-weight: bold;
-}
-
-.messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.message {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #7c5cff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.message-name {
-    font-weight: bold;
-    margin-bottom: 4px;
-}
-
-.message-text {
-    color: #b7bdc9;
-}
-
-.input-area {
-    padding: 15px;
-    border-top: 1px solid #20232d;
-}
-
-.input-box {
-    width: 100%;
-    background: #1b1f29;
-    border: none;
-    outline: none;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    font-size: 15px;
-}
-
-/* SAĞ PANEL */
-.members {
-    width: 210px;
-    background: #10131a;
-    padding: 20px;
-    border-left: 1px solid #20232d;
-}
-
-.members h3 {
-    color: #858c9b;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
-
-.member {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.status {
-    width: 9px;
-    height: 9px;
-    background: #35d07f;
-    border-radius: 50%;
-}
-
-/* MOBİL */
-.mobile-nav {
-    display: none;
-}
-
-@media(max-width: 800px) {
-
-    .servers {
-        display: none;
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
 
-    .channels {
-        display: none;
+    body {
+      min-height: 100vh;
+      background: #0b0b0f;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
-    .members {
-        display: none;
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: #15151c;
+      border: 1px solid #292933;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
 
-    .topbar {
-        height: 58px;
+    .logo {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
     }
 
-    .app {
-        height: calc(100vh - 58px);
+    .subtitle {
+      text-align: center;
+      color: #9999a6;
+      margin-bottom: 28px;
     }
 
-    .mobile-nav {
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 65px;
-        background: #11141c;
-        border-top: 1px solid #252936;
-        justify-content: space-around;
-        align-items: center;
-        z-index: 10;
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-size: 14px;
+      color: #d7d7df;
     }
 
-    .mobile-nav button {
-        background: none;
-        border: none;
-        color: #8d94a3;
-        font-size: 23px;
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #33333f;
+      border-radius: 10px;
+      background: #0f0f14;
+      color: white;
+      outline: none;
+      font-size: 15px;
     }
 
-    .mobile-nav button.active {
-        color: #7c5cff;
+    input:focus {
+      border-color: #7c5cff;
     }
 
-    .messages {
-        padding-bottom: 90px;
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #7c5cff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .input-area {
-        padding-bottom: 75px;
+    button:hover {
+      opacity: 0.9;
     }
-}
-</style>
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #message {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="topbar">
-    <div class="logo">V<span>aesni</span></div>
-</header>
+  <div class="container">
 
-<div class="app">
+    <div class="logo">Vaesni</div>
 
-    <aside class="servers">
-        <div class="server">V</div>
-        <div class="server">🎮</div>
-        <div class="server">🎵</div>
-        <div class="server add">+</div>
-    </aside>
+    <div class="subtitle">
+      Hesabını oluştur
+    </div>
 
-    <aside class="channels">
-        <h3>VAESNI SUNUCUSU</h3>
+    <form id="signup-form">
 
-        <div class="channel active"># genel</div>
-        <div class="channel"># sohbet</div>
-        <div class="channel"># oyun</div>
-        <div class="channel"># müzik</div>
-    </aside>
+      <label for="username">Kullanıcı adı</label>
 
-    <main class="chat">
+      <input
+        type="text"
+        id="username"
+        placeholder="Kullanıcı adın"
+        required
+      >
 
-        <div class="chat-header">
-            # genel
-        </div>
+      <label for="email">E-posta</label>
 
-        <div class="messages">
+      <input
+        type="email"
+        id="email"
+        placeholder="ornek@mail.com"
+        required
+      >
 
-            <div class="message">
-                <div class="avatar">V</div>
+      <label for="password">Şifre</label>
 
-                <div>
-                    <div class="message-name">
-                        Vaesni
-                    </div>
+      <input
+        type="password"
+        id="password"
+        placeholder="Şifren"
+        minlength="6"
+        required
+      >
 
-                    <div class="message-text">
-                        Vaesni'ye hoş geldin! 🚀
-                    </div>
-                </div>
-            </div>
+      <button
+        type="submit"
+        id="signup-button"
+      >
+        Kayıt Ol
+      </button>
 
-            <div class="message">
-                <div class="avatar">O</div>
+    </form>
 
-                <div>
-                    <div class="message-name">
-                        Oğuz
-                    </div>
+    <div id="message"></div>
 
-                    <div class="message-text">
-                        Burası bizim yeni topluluğumuz.
-                    </div>
-                </div>
-            </div>
+  </div>
 
-        </div>
 
-        <div class="input-area">
-            <input
-                class="input-box"
-                placeholder="# genel kanalına mesaj gönder..."
-            >
-        </div>
+  <!-- SUPABASE -->
 
-    </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <aside class="members">
+  <script>
 
-        <h3>ÇEVRİMİÇİ — 2</h3>
+    // ==============================
+    // SUPABASE AYARLARI
+    // ==============================
 
-        <div class="member">
-            <div class="avatar">V</div>
-            Vaesni
-            <div class="status"></div>
-        </div>
+    const SUPABASE_URL =
+      "https://aylitbspehzmluunwnrx.supabase.co";
 
-        <div class="member">
-            <div class="avatar">O</div>
-            Oğuz
-            <div class="status"></div>
-        </div>
+    const SUPABASE_KEY =
+      "sb_publishable_m67SK-0omCT__5qOHaiHYg_FDt5lzhz";
 
-    </aside>
 
-</div>
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
 
-<nav class="mobile-nav">
-    <button class="active">💬</button>
-    <button>🔍</button>
-    <button>➕</button>
-    <button>👤</button>
-</nav>
+
+    // ==============================
+    // HTML ELEMANLARI
+    // ==============================
+
+    const form =
+      document.getElementById("signup-form");
+
+    const message =
+      document.getElementById("message");
+
+    const button =
+      document.getElementById("signup-button");
+
+
+    // ==============================
+    // KAYIT İŞLEMİ
+    // ==============================
+
+    form.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        const username =
+          document
+            .getElementById("username")
+            .value
+            .trim();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        if (!username || !email || !password) {
+
+          message.textContent =
+            "Lütfen tüm alanları doldur.";
+
+          return;
+        }
+
+
+        button.disabled = true;
+
+        message.textContent =
+          "Hesap oluşturuluyor...";
+
+
+        // ==============================
+        // SUPABASE AUTH KULLANICISI
+        // ==============================
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password
+
+          });
+
+
+        if (error) {
+
+          message.textContent =
+            "Hata: " + error.message;
+
+          button.disabled = false;
+
+          return;
+        }
+
+
+        // ==============================
+        // USERS TABLOSUNA KAYDET
+        // ==============================
+
+        if (data.user) {
+
+          const {
+            error: profileError
+          } =
+            await supabaseClient
+              .from("users")
+              .insert({
+
+                id: data.user.id,
+
+                username: username,
+
+                email: email
+
+              });
+
+
+          if (profileError) {
+
+            message.textContent =
+              "Profil oluşturulamadı: "
+              + profileError.message;
+
+            button.disabled = false;
+
+            return;
+          }
+        }
+
+
+        // ==============================
+        // BAŞARILI
+        // ==============================
+
+        message.textContent =
+          "Kayıt başarılı! 🎉";
+
+        form.reset();
+
+        button.disabled = false;
+
+      }
+
+    );
+
+  </script>
 
 </body>
 </html>
